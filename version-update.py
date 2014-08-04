@@ -33,10 +33,10 @@ def parse_parent(parent):
     parent.version.string = "2.1.1"
   return
 
-def parse_pom(pom):
-  print "Processing pom file: " + pom
+def parse_pom(path):
+  print "Processing pom file: " + path + "/pom.xml"
 
-  f = open(pom)
+  f = open(path + "/pom.xml")
   doc = bs4.BeautifulSoup(f, "xml")
   f.close()
 
@@ -47,13 +47,13 @@ def parse_pom(pom):
     for mod in doc.modules:
       if type(mod) != bs4.element.Tag:
         continue
-      parse_pom(mod.string + "/pom.xml")
+      parse_pom(path + "/" + mod.string)
 
   if doc.dependencies:
     for dep in doc.dependencies:
       parse_dep(dep)
 
-  f = open(pom, "w")
+  f = open(path + "/pom.xml", "w")
   f.write(str(tidy_document(str(doc), options={'output_xml':1, 'indent':1, 'input_xml':1})[0]))
   f.close()
 parse_pom(sys.argv[1])
