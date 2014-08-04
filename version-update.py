@@ -1,4 +1,10 @@
 #!/usr/bin/env python
+
+# brew install python
+# pip install beautifulsoup4
+# pip install lxml
+# pip install pytidylib
+
 import sys
 import bs4
 from tidylib import tidy_document
