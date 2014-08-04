@@ -22,7 +22,7 @@ def parse_dep(dep):
   if type(dep) != bs4.element.Tag:
     return
   if dep.groupId.string.startswith("com.rocketlawyer") or dep.groupId.string.startswith("com.rocketlawyer"):
-    if any(dep.artifactId.string in s for s in ["rl-core", "persistence", "rl-protobuffers", "protobuffers"]):
+    if any(dep.artifactId.string in s for s in ["rl-core", "persistence", "RL-ProtoBuffers", "protobuffers"]):
       update_platform_version(dep)
     else:
       update_rl_version(dep)
